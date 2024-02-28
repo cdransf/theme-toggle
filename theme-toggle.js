@@ -1,7 +1,9 @@
 const themeToggleTemplate = document.createElement('template')
 
 themeToggleTemplate.innerHTML = `
-  <button class="theme__toggle">
+  <button
+    class="theme__toggle"
+    aria-label="Toggle site theme">
     <span class="light"></span>
     <span class="dark"></span>
   </button>
