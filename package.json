@@ -1,6 +1,6 @@
 {
   "name": "@cdransf/theme-toggle",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple web component that simplifies controlling light/dark theming for a site.",
   "main": "theme-toggle.js",
   "files": [
