@@ -2,6 +2,10 @@
 
 A simple web component that simplifies controlling light/dark theming for a site.
 
+```
+npm i @cdransf/theme-toggle
+```
+
 ---
 
 ## Example usage
