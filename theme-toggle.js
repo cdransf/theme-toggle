@@ -24,7 +24,7 @@ class ThemeToggle extends HTMLElement {
     this.theme
     this.setTheme = () => {
       if (!this.currentTheme) sessionStorage?.setItem('theme', (this.prefersDarkScheme ? 'dark' : 'light'))
-      
+
       if (this.prefersDarkScheme) {
         this.theme = document.body.classList.contains('theme__light') ? 'light' : 'dark'
       } else {
@@ -32,17 +32,7 @@ class ThemeToggle extends HTMLElement {
       }
       sessionStorage?.setItem('theme', this.theme)
     }
-    
-    if (this.currentTheme === 'dark') {
-      document.body.classList.add('theme__dark')
-    } else if (this.currentTheme === 'light') {
-      document.body.classList.add('theme__light')
-    } else if (this.prefersDarkScheme) {
-      document.body.classList.add('theme__dark')
-    } else if (!this.prefersDarkScheme) {
-      document.body.classList.add('theme__light')
-    }
-    
+
     this.setTheme();
     this.btn.addEventListener('click', () => {
       document.body.classList.toggle('theme__light')

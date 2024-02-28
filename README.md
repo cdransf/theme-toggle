@@ -10,6 +10,14 @@ npm i @cdransf/theme-toggle
 
 ## Example usage
 
+Add the `theme-load.js` to your document `<head>` to prevent an unthemed flash on load.
+
+```html
+<head>
+  <script type="module" src="/scripts/theme-load.js"></script>
+</head>
+```
+
 Add the `theme-toggle.js` to your markup, set your template (the `.light` and `.dark` tag contents are intended to be specified when this is leveraged). The SVGs below are examples from the [Tabler Icons](https://tabler.io/icons) set.
 
 ```html
