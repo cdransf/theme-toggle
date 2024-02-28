@@ -1,4 +1,4 @@
-# `<theme-toggle></theme-toggle>` web component
+# `<theme-toggle>` web component
 
 A simple web component that simplifies controlling light/dark theming for a site.
 
