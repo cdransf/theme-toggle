@@ -18,37 +18,36 @@ class ThemeToggle extends HTMLElement {
 
   async connectedCallback() {
     this.append(this.template)
-    const btn = this.querySelector('.theme__toggle')
-    const setTheme = (isOnLoad) => {
-      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      const currentTheme = localStorage?.getItem('theme')
-      let theme
-      if (!currentTheme) localStorage?.setItem('theme', (prefersDarkScheme ? 'dark' : 'light'))
-      if (isOnLoad) {
-        if (currentTheme === 'dark') {
-          document.body.classList.add('theme__dark')
-        } else if (currentTheme === 'light') {
-          document.body.classList.add('theme__light')
-        } else if (prefersDarkScheme) {
-          document.body.classList.add('theme__dark')
-        } else if (!prefersDarkScheme) {
-          document.body.classList.add('theme__light')
-        }
-      }
-      if (prefersDarkScheme) {
-        theme = document.body.classList.contains('theme__light') ? 'light' : 'dark'
+    this.btn = this.querySelector('.theme__toggle')
+    this.prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+    this.currentTheme = localStorage?.getItem('theme')
+    this.theme
+    this.setTheme = () => {
+      if (!this.currentTheme) localStorage?.setItem('theme', (this.prefersDarkScheme ? 'dark' : 'light'))
+      if (this.prefersDarkScheme) {
+        this.theme = document.body.classList.contains('theme__light') ? 'light' : 'dark'
       } else {
-        theme = document.body.classList.contains('theme__dark') ? 'dark' : 'light'
+        this.theme = document.body.classList.contains('theme__dark') ? 'dark' : 'light'
       }
-      localStorage?.setItem('theme', theme)
+      localStorage?.setItem('theme', this.theme)
     }
 
-    setTheme(true);
+    if (this.currentTheme === 'dark') {
+      document.body.classList.add('theme__dark')
+    } else if (this.currentTheme === 'light') {
+      document.body.classList.add('theme__light')
+    } else if (this.prefersDarkScheme) {
+      document.body.classList.add('theme__dark')
+    } else if (!this.prefersDarkScheme) {
+      document.body.classList.add('theme__light')
+    }
 
-    btn.addEventListener('click', () => {
+    this.setTheme();
+
+    this.btn.addEventListener('click', () => {
       document.body.classList.toggle('theme__light')
       document.body.classList.toggle('theme__dark')
-      setTheme()
+      this.setTheme()
     })
   }
 
