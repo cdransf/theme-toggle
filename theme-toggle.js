@@ -1,26 +1,21 @@
-const themeToggleTemplate = document.createElement('template')
-
-themeToggleTemplate.innerHTML = `
-  <button
-    class="theme__toggle"
-    aria-label="Toggle site theme">
-    <span class="light"></span>
-    <span class="dark"></span>
-  </button>
-`
-
-themeToggleTemplate.id = "theme-toggle-template"
-
-if (!document.getElementById(themeToggleTemplate.id)) document.body.appendChild(themeToggleTemplate)
-
 class ThemeToggle extends HTMLElement {
-  static register(tagName) {
-    if ("customElements" in window) customElements.define(tagName || "theme-toggle", ThemeToggle)
+  static tagName = 'theme-toggle';
+
+  static register(tagName, registry) {
+    if(!registry && ('customElements' in globalThis)) {
+      registry = globalThis.customElements;
+    }
+    registry?.define(tagName || this.tagName, this);
   }
 
   connectedCallback() {
-    this.append(this.template)
-    this.btn = this.querySelector('.theme__toggle')
+    if (this.shadowRoot) return;
+
+    let shadowroot = this.attachShadow({ mode: 'open' })
+    let slot = document.createElement('slot')
+    shadowroot.appendChild(slot)
+
+    this.button = this.querySelector('button')
     this.prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
     this.currentTheme = sessionStorage?.getItem('theme')
     this.theme
@@ -34,18 +29,13 @@ class ThemeToggle extends HTMLElement {
       }
       sessionStorage?.setItem('theme', this.theme)
     }
-
     this.setTheme();
-    this.btn.addEventListener('click', () => {
+    this.button.addEventListener('click', () => {
       document.body.classList.toggle('theme__light')
       document.body.classList.toggle('theme__dark')
       this.setTheme()
     })
   }
-
-  get template() {
-    return document.getElementById(themeToggleTemplate.id).content.cloneNode(true)
-  }
 }
 
-ThemeToggle.register()
+ThemeToggle.register();
