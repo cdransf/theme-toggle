@@ -1,0 +1,23 @@
+{
+  "name": "@cdransf/theme-toggle",
+  "version": "1.0.0",
+  "description": "A simple web component that simplifies controlling light/dark theming for a site.",
+  "main": "tablericons.js",
+  "files": [
+    "tablericons.js",
+    "icons.js"
+  ],
+  "keywords": [
+    "web component",
+    "webcomponent"
+  ],
+  "author": {
+    "email": "coryd@hey.com",
+    "name": "Cory Dransfeldt",
+    "url": "https://coryd.dev"
+  },
+  "repository": "https://github.com/cdransf/theme-toggle",
+  "homepage": "https://github.com/cdransf/theme-toggle#readme",
+  "bugs": "https://github.com/cdransf/theme-toggle/issues",
+  "license": "MIT"
+}
