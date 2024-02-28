@@ -16,39 +16,56 @@ class ThemeToggle extends HTMLElement {
     if ("customElements" in window) customElements.define(tagName || "theme-toggle", ThemeToggle)
   }
 
+  static attr = {
+    toggle: 'theme__toggle',
+    light: 'theme__light',
+    dark: 'theme__dark'
+  }
+
+  get toggle() {
+    return this.getAttribute(ThemeToggle.attr.toggle) || this.toggle;
+  }
+
+  get light() {
+    return this.getAttribute(ThemeToggle.attr.light) || this.light;
+  }
+
+  get dark() {
+    return this.getAttribute(ThemeToggle.attr.dark) || this.dark;
+  }
+
   async connectedCallback() {
     this.append(this.template)
-    const btn = this.querySelector('.theme__toggle')
-    const setTheme = (isOnLoad) => {
-      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      const currentTheme = localStorage?.getItem('theme')
-      let theme
-      if (!currentTheme) localStorage?.setItem('theme', (prefersDarkScheme ? 'dark' : 'light'))
+    this.btn = this.querySelector(`.${this.toggle}`)
+    this.setTheme = (isOnLoad) => {
+      this.prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      this.currentTheme = localStorage?.getItem('theme')
+      this.theme
+      if (!this.currentTheme) localStorage?.setItem('theme', (this.prefersDarkScheme ? 'dark' : 'light'))
       if (isOnLoad) {
-        if (currentTheme === 'dark') {
-          document.body.classList.add('theme__dark')
-        } else if (currentTheme === 'light') {
-          document.body.classList.add('theme__light')
-        } else if (prefersDarkScheme) {
-          document.body.classList.add('theme__dark')
-        } else if (!prefersDarkScheme) {
-          document.body.classList.add('theme__light')
+        if (this.currentTheme === 'dark') {
+          document.body.classList.add(this.dark)
+        } else if (this.currentTheme === 'light') {
+          document.body.classList.add(this.light)
+        } else if (this.prefersDarkScheme) {
+          document.body.classList.add(this.dark)
+        } else if (!this.prefersDarkScheme) {
+          document.body.classList.add(this.light)
         }
       }
-      if (prefersDarkScheme) {
-        theme = document.body.classList.contains('theme__light') ? 'light' : 'dark'
+      if (this.prefersDarkScheme) {
+        this.theme = document.body.classList.contains(this.light) ? 'light' : 'dark'
       } else {
-        theme = document.body.classList.contains('theme__dark') ? 'dark' : 'light'
+        this.theme = document.body.classList.contains(this.dark) ? 'dark' : 'light'
       }
-      localStorage?.setItem('theme', theme)
+      localStorage?.setItem('theme', this.theme)
     }
 
-    setTheme(true);
-
-    btn.addEventListener('click', () => {
-      document.body.classList.toggle('theme__light')
-      document.body.classList.toggle('theme__dark')
-      setTheme()
+    this.setTheme(true);
+    this.btn.addEventListener('click', () => {
+      document.body.classList.toggle(this.light)
+      document.body.classList.toggle(this.dark)
+      this.setTheme()
     })
   }
 

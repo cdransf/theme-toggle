@@ -1,8 +1,8 @@
 {
   "name": "@cdransf/theme-toggle",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple web component that simplifies controlling light/dark theming for a site.",
-  "main": "tablericons.js",
+  "main": "theme-toggle.js",
   "files": [
     "tablericons.js",
     "icons.js"
