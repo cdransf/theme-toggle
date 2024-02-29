@@ -111,7 +111,7 @@ You will, also, need to style the component and set light and dark styles for yo
 }
 
 /* light theme */
-:root body.theme__light {
+:root.theme__light {
   --text-color: var(--color-darkest);
   --background-color: var(--color-lightest);
   --text-color-inverted: var(--color-lightest);
@@ -126,7 +126,7 @@ You will, also, need to style the component and set light and dark styles for yo
 }
 
 /* dark theme */
-:root body.theme__dark {
+:root.theme__dark {
   --text-color: var(--color-lightest);
   --background-color: var(--color-darkest);
   --text-color-inverted: var(--color-darkest);
