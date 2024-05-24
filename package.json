@@ -1,6 +1,6 @@
 {
   "name": "@cdransf/theme-toggle",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A web component that simplifies controlling light/dark theming for a site.",
   "main": "theme-toggle.js",
   "files": [
@@ -27,7 +27,7 @@
   },
   "author": {
     "name": "Cory Dransfeldt",
-    "email": "coryd@hey.com",
+    "email": "hi@coryd.dev",
     "url": "https://coryd.dev"
   },
   "homepage": "https://github.com/cdransf/theme-toggle#readme"
