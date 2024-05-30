@@ -19,17 +19,22 @@ class ThemeToggle extends HTMLElement {
   setTheme() {
     if (!this.currentTheme) {
       this.currentTheme = this.prefersDarkScheme ? 'dark' : 'light'
-      sessionStorage.setItem('theme', this.currentTheme)
     }
 
-    this.theme = this.root.classList.contains('theme__light') ? 'light' : 'dark'
+    this.theme = this.currentTheme
 
-    if (!this.root.classList.contains(`theme__${this.theme}`)) this.root.classList.add(`theme__${this.theme}`)
+    if (this.theme === 'dark') {
+      this.root.classList.add('theme__dark')
+      this.root.classList.remove('theme__light')
+    } else {
+      this.root.classList.add('theme__light')
+      this.root.classList.remove('theme__dark')
+    }
   }
 
   toggleTheme() {
-    this.root.classList.toggle('theme__light')
-    this.root.classList.toggle('theme__dark')
+    this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark'
+    sessionStorage.setItem('theme', this.currentTheme)
     this.setTheme()
   }
 }
