@@ -2,7 +2,7 @@
 
 A web component that simplifies controlling light/dark theming for a site.
 
-```
+```sh
 npm i @cdransf/theme-toggle
 ```
 
@@ -22,60 +22,56 @@ Add the `theme-toggle.js` to your markup, set your template (the `.light` and `.
 
 ```html
 <script type="module" src="/scripts/components/theme-toggle.js"></script>
-<li class="client-side">
-  <theme-toggle>
-    <button
-      class="theme__toggle"
-      aria-label="Toggle site theme">
-      <span class="light">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>
-      </span>
-      <span class="dark">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
-      </span>
-    </button>
-  </theme-toggle>
-</li>
+<theme-toggle>
+  <button class="theme-toggle" tabindex="0">
+    <span class="light">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>
+    </span>
+    <span class="dark">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
+    </span>
+  </button>
+</theme-toggle>
 ```
 
 You will, also, need to style the component and set light and dark styles for your site. Examples below.
 
 ```css
-.theme__toggle {
+.theme-toggle {
   background: transparent;
   padding: 0;
 }
 
-.theme__toggle svg {
+.theme-toggle svg {
   cursor: pointer;
 }
 
-.theme__toggle:hover,
-.theme__toggle svg:hover {
+.theme-toggle:hover,
+.theme-toggle svg:hover {
   stroke-width: var(--stroke-width-bold);
 }
 
-.theme__toggle > .light svg { stroke: var(--sun) !important; }
-.theme__toggle > .dark svg { stroke: var(--moon) !important; }
+.theme-toggle > .light svg { stroke: var(--sun); }
+.theme-toggle > .dark svg { stroke: var(--moon); }
 
-.theme__toggle > .light ,
-.theme__toggle > .dark {
+.theme-toggle > .light ,
+.theme-toggle > .dark {
   display: none;
 }
 
-.theme__dark .theme__toggle > .light {
+.theme-dark .theme-toggle > .light {
   display: inline;
 }
 
-.theme__dark .theme__toggle > .dark {
+.theme-dark .theme-toggle > .dark {
   display: none;
 }
 
-.theme__light .theme__toggle > .light {
+[data-theme="light"] .theme-toggle > .light {
   display: none;
 }
 
-.theme__light .theme__toggle > .dark {
+[data-theme="light"] .theme-toggle > .dark {
   display: inline;
 }
 ```
@@ -111,7 +107,7 @@ You will, also, need to style the component and set light and dark styles for yo
 }
 
 /* light theme */
-:root.theme__light {
+:root[data-theme="light"] {
   --text-color: var(--color-darkest);
   --background-color: var(--color-lightest);
   --text-color-inverted: var(--color-lightest);
@@ -126,7 +122,7 @@ You will, also, need to style the component and set light and dark styles for yo
 }
 
 /* dark theme */
-:root.theme__dark {
+:root.[data-theme="dark"] {
   --text-color: var(--color-lightest);
   --background-color: var(--color-darkest);
   --text-color-inverted: var(--color-darkest);
