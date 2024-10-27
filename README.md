@@ -15,8 +15,18 @@ Add the `theme-load.js` to your document `<body>` to prevent an unthemed flash o
 ```html
 <body>
   <script type="module" src="/scripts/theme-load.js"></script>
+   <theme-toggle>
+      <button aria-label="Light and dark theme toggle" class="theme-toggle">
+        <span class="light"></span>
+        <span class="dark"></span>
+      </button>
+    </theme-toggle>
 </body>
 ```
+
+Optional attributes:
+
+- **mode:** accepts either `control` or `toggle` and defaults to `toggle`. If `toggle` is set, you can add `<span class="auto"></span>` and allow the user to cycle back to their system preference.
 
 - Add the `theme-toggle.js` to your markup, set your template.
 - Add `<meta name="color-scheme" content="light dark">` to your site's header.
