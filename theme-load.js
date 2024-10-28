@@ -1,5 +1,10 @@
 (() => {
-  const currentTheme = sessionStorage.getItem("theme") || "auto";
+  const storageType =
+    document.querySelector("theme-toggle")?.getAttribute("storage") === "local"
+      ? localStorage
+      : sessionStorage;
+
+  const currentTheme = storageType.getItem("theme") || "auto";
   const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
 
   if (currentTheme === "auto") {

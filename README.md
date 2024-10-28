@@ -24,9 +24,10 @@ Add the `theme-load.js` to your document `<body>` to prevent an unthemed flash o
 </body>
 ```
 
-Optional attributes:
+**Optional attributes:**
 
 - **mode:** accepts either `control` or `toggle` and defaults to `toggle`. If `toggle` is set, you can add `<span class="auto"></span>` and allow the user to cycle back to their system preference.
+- **storage:** sets the storage API to be used. Defaults to `sessionStorage`, but can also be set to "`local` for `localStorage`.
 
 - Add the `theme-toggle.js` to your markup, set your template.
 - Add `<meta name="color-scheme" content="light dark">` to your site's header.

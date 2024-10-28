@@ -8,6 +8,10 @@ class ThemeToggle extends HTMLElement {
     registry.define(tagName, this);
   }
 
+  static attr = {
+    storage: "storage",
+  };
+
   connectedCallback() {
     if (this.shadowRoot) return;
 
@@ -20,10 +24,15 @@ class ThemeToggle extends HTMLElement {
     this.prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
     this.mode = this.getAttribute("mode") || "toggle";
-    this.currentTheme = sessionStorage.getItem("theme") || "auto";
+    this.currentTheme = this.storage.getItem("theme") || "auto";
 
     this.setTheme();
     this.addEventListeners();
+  }
+
+  get storage() {
+    const storageValue = this.getAttribute(ThemeToggle.attr.storage);
+    return storageValue === "local" ? localStorage : sessionStorage;
   }
 
   getPreferredTheme() {
@@ -71,9 +80,9 @@ class ThemeToggle extends HTMLElement {
     }
 
     if (this.currentTheme !== "auto") {
-      sessionStorage.setItem("theme", this.currentTheme);
+      this.storage.setItem("theme", this.currentTheme);
     } else {
-      sessionStorage.removeItem("theme");
+      this.storage.removeItem("theme");
     }
 
     this.setTheme();
